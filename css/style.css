@@ -18,12 +18,22 @@ main{
 }
 
 .top{
-    background-image: url('../images/MoviePIC.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 20%;
+    
     padding: 6em 3em;
+    position: relative;
 }
+.top::before{
+    content: "";
+  position: absolute;
+  top: 0; left: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 24%;
+  width: 100%; height: 100%;
+  background-image: url('../images/MoviePIC.jpg');
+  filter: brightness(25%);
+}
+
 
 
 
@@ -32,6 +42,7 @@ main{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 h1{
