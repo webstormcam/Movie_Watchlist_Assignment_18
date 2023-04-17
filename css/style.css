@@ -5,13 +5,18 @@
 body{
     background-color: #1c1c1c;
     font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
 }
 
 main{
     width: 100%;
     max-width: 550px;
+    display: flex;
+    flex-direction: column;
 }
 
 .title-link-space{
     color: #ffffff;
+    display: flex;
 }
