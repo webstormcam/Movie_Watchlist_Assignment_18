@@ -19,7 +19,7 @@ main{
 
 .top{
     
-    padding: 6em 3em;
+    padding: 6em 2.5em;
     position: relative;
 }
 .top::before{
