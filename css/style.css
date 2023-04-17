@@ -16,6 +16,14 @@ main{
     flex-direction: column;
 }
 
+.top{
+    background-image: url('../images/MoviePIC.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 20%;
+    padding: 5.8em;
+}
+
 .title-link-space{
     color: #ffffff;
     display: flex;
