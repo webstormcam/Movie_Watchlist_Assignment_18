@@ -1,3 +1,17 @@
 *{
     box-sizing: border-box;
 }
+
+body{
+    background-color: #1c1c1c;
+    font-family: 'Inter', sans-serif;
+}
+
+main{
+    width: 100%;
+    max-width: 550px;
+}
+
+.title-link-space{
+    color: #ffffff;
+}
