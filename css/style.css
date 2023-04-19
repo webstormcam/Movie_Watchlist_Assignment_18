@@ -70,8 +70,10 @@ h1{
     color: #A5A5A5;
     font-size: 0.875em;
     border: none;
-    padding: 0.5em 4em;
+    padding: 0.8em 4em;
     padding-left: 30px;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
 }
 
 .data-display{
