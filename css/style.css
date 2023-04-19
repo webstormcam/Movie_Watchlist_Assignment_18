@@ -61,3 +61,16 @@ h1{
     bottom: -0.5em;
     position: absolute;
 }
+
+.enter-movie{
+    background-color: #2e2e2f;
+    color: #A5A5A5;
+    font-size: 0.875em;
+    border: none;
+    padding: 0.5em 0.5em;
+}
+
+.data-display{
+    min-height: 400px;
+    background-color: #121212;
+}
