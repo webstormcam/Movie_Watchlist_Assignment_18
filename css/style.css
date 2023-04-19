@@ -105,6 +105,12 @@ h1{
     margin-top: 1em;
 }
 
+.watch-list-plus{
+    position: relative;
+    left: -0.5em;
+    top: 0.2em;
+}
+
 a{
     text-decoration: none;
     color: inherit;
