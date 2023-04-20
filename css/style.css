@@ -60,20 +60,32 @@ h1{
 .input-selection-area{
     bottom: -1em;
     position: absolute;
+    margin: 0 auto;
 }
 
 .enter-movie{
-  
-    background: url("/images/Search_icon.png") no-repeat scroll 7px 7px;
+    background: url("/images/Search_icon.png") no-repeat scroll 7px 10px;
     background-size: 20px;
     background-color: #2e2e2f;
     color: #A5A5A5;
     font-size: 0.875em;
     border: none;
-    padding: 0.8em 4em;
+    padding: 1em 4em;
     padding-left: 30px;
     border-top-left-radius: 1em;
     border-bottom-left-radius: 1em;
+    max-width: 342px;
+}
+
+.search{
+     background-color: #4B4B4B;
+     color: #ffffff;
+     padding: 1em 1em;
+     border-top-right-radius: 1em;
+     border-bottom-right-radius: 1em;
+     border: none;
+    
+     max-width: 120px;
 }
 
 .data-display{
