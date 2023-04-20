@@ -58,9 +58,11 @@ h1{
 }
 
 .input-selection-area{
-    bottom: -1em;
-    position: absolute;
+    bottom: -7em;
+    position: relative;
     margin: 0 auto;
+    width: 100%;
+    max-width: 470px;
 }
 
 .enter-movie{
@@ -74,7 +76,7 @@ h1{
     padding-left: 30px;
     border-top-left-radius: 1em;
     border-bottom-left-radius: 1em;
-    max-width: 342px;
+    width: 75%;
 }
 
 .search{
@@ -84,8 +86,7 @@ h1{
      border-top-right-radius: 1em;
      border-bottom-right-radius: 1em;
      border: none;
-    
-     max-width: 120px;
+    width: 25%;
 }
 
 .data-display{
