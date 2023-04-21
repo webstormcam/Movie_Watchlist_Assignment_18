@@ -87,6 +87,7 @@ h1{
      border-bottom-right-radius: 1em;
      border: none;
     width: 25%;
+    cursor: pointer;
 }
 
 .data-display{
