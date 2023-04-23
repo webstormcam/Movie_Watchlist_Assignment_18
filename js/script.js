@@ -1,7 +1,8 @@
 const searchMovie = document.getElementById('search')
 let inputValue = document.getElementById('enter-movie')
-const placeholderArea = document.getElementById('placeholder-place')
+const dataDisplay = document.getElementById('data-display')
 let arrayOfFilms=[];
+
 searchMovie.addEventListener('click',function(){
     arrayOfFilms =[];
     let searchedValue = inputValue.value
@@ -12,17 +13,23 @@ searchMovie.addEventListener('click',function(){
        
         .then(data =>{
             if(data.Response==="False"){
-                placeholderArea.innerHTML =`
-                <p class="unable-text">Unable to find what you're looking for. Please try another search.</p>`
+                dataDisplay.innerHTML =`
+                <div id="placeholder-place" class="place-holder-area">
+                <p class="unable-text">Unable to find what you're looking for. Please try another search.</p>
+                </div>`
             } else{
                 for(let i=0;i<data.Search.length;i++){
                     fetch(`https://www.omdbapi.com/?apikey=55ea45d4&t=${data.Search[i].Title}`)
                     .then(res=>res.json())
                     .then(data=>{
-                        arrayOfFilms.push(data)
+                        let movie = `<div>
+                        <h2>${data.Title}</h2>
+                        </div>`
+                        arrayOfFilms.push(movie)
                     })
                     
                 }
+              
             }
 
             
