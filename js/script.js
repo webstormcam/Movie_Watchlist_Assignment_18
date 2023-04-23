@@ -4,7 +4,7 @@ const placeholderArea = document.getElementById('placeholder-place')
 searchMovie.addEventListener('click',function(){
     let searchedValue = inputValue.value
    
-        fetch(`https://www.omdbapi.com/?apikey=55ea45d4&s=${searchedValue}`)
+        fetch(`https://www.omdbapi.com/?apikey=55ea45d4&type=movie&s=${searchedValue}`)
         .then(res=>res.json())
        
         .then(data =>{
@@ -21,6 +21,8 @@ searchMovie.addEventListener('click',function(){
                     
                 }
             }
+
+            
            
             
         })
