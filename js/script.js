@@ -2,7 +2,7 @@ const searchMovie = document.getElementById('search')
 let inputValue = document.getElementById('enter-movie')
 const dataDisplay = document.getElementById('data-display')
 let arrayOfFilms=[];
-
+let movies =""
 searchMovie.addEventListener('click',function(){
     arrayOfFilms =[];
     let searchedValue = inputValue.value
@@ -22,21 +22,22 @@ searchMovie.addEventListener('click',function(){
                     fetch(`https://www.omdbapi.com/?apikey=55ea45d4&t=${data.Search[i].Title}`)
                     .then(res=>res.json())
                     .then(data=>{
-                        let movie = `<div>
+                         movies+= `<div>
                         <h2>${data.Title}</h2>
                         </div>`
-                        arrayOfFilms.push(movie)
+            
                     })
                     
                 }
+                dataDisplay.innerHTML = movies
               
             }
 
-            
+          
            
             
         })
     
-   console.log(arrayOfFilms)
+  
 })
 
