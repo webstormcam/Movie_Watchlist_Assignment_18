@@ -5,6 +5,7 @@ let arrayOfFilms=[];
 searchMovie.addEventListener('click',function(){
     arrayOfFilms =[];
     let searchedValue = inputValue.value
+    inputValue.value =""
    
         fetch(`https://www.omdbapi.com/?apikey=55ea45d4&type=movie&s=${searchedValue}`)
         .then(res=>res.json())
