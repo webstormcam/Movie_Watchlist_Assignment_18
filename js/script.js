@@ -1,7 +1,9 @@
 const searchMovie = document.getElementById('search')
 let inputValue = document.getElementById('enter-movie')
 const placeholderArea = document.getElementById('placeholder-place')
+let arrayOfFilms=[];
 searchMovie.addEventListener('click',function(){
+    arrayOfFilms =[];
     let searchedValue = inputValue.value
    
         fetch(`https://www.omdbapi.com/?apikey=55ea45d4&type=movie&s=${searchedValue}`)
@@ -16,7 +18,7 @@ searchMovie.addEventListener('click',function(){
                     fetch(`https://www.omdbapi.com/?apikey=55ea45d4&t=${data.Search[i].Title}`)
                     .then(res=>res.json())
                     .then(data=>{
-                        console.log(data)
+                        arrayOfFilms.push(data)
                     })
                     
                 }
@@ -27,6 +29,6 @@ searchMovie.addEventListener('click',function(){
             
         })
     
-   
+   console.log(arrayOfFilms)
 })
 
