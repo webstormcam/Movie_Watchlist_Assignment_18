@@ -33,3 +33,4 @@ async function fetchMoviesJSON(searchableMovie){
 
 
 ////Think about return all the movies in an array then checking them for pictures and placing in a image for the blank ones and also maybe catch duplicates. 
+//// Put all the movies in an array and then work with the class constructor to deal with our local storage thing
