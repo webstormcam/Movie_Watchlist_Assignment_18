@@ -142,3 +142,13 @@ a{
     width: 350px;
     color: #787878;
 }
+
+.movie-poster{
+    width: 99px;
+}
+
+.movie-div{
+    border-bottom: 1px solid #2C2C2C ;
+    padding: 1em 0em;
+    display: flex;
+}

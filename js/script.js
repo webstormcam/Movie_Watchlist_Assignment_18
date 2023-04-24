@@ -22,7 +22,8 @@ async function fetchMoviesJSON(searchableMovie){
         for(let i = 0; i<movies.Search.length;i++){
            const res = await fetch(`https://www.omdbapi.com/?apikey=55ea45d4&t=${movies.Search[i].Title}`)
            const fullMovie = await res.json()
-           grouptitles+= `<div><h2>${fullMovie.Title}</h2></div>`
+           grouptitles+= `<div class="movie-div"><img class="movie-poster" src=${fullMovie.Poster}>
+           <div class="movie-words"></div></div>`
         }
         console.log(grouptitles)
        dataDisplay.innerHTML=grouptitles
@@ -30,3 +31,5 @@ async function fetchMoviesJSON(searchableMovie){
 
 }
 
+
+////Think about return all the movies in an array then checking them for pictures and placing in a image for the blank ones and also maybe catch duplicates. 
