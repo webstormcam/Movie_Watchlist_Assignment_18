@@ -1,7 +1,7 @@
 const searchMovie = document.getElementById('search')
 let inputValue = document.getElementById('enter-movie')
 let dataDisplay = document.getElementById('data-display')
-let grouptitles =``
+let groupMovieArray =[]
 searchMovie.addEventListener('click',function(){
     let searchedValue = inputValue.value
     inputValue.value =""
@@ -18,17 +18,23 @@ async function fetchMoviesJSON(searchableMovie){
                 <p class="unable-text">Unable to find what you're looking for. Please try another search.</p>
                 </div>`
     } else{
-        grouptitles= ``
+        groupMovieArray =[]
         for(let i = 0; i<movies.Search.length;i++){
            const res = await fetch(`https://www.omdbapi.com/?apikey=55ea45d4&t=${movies.Search[i].Title}`)
            const fullMovie = await res.json()
-           grouptitles+= `<div class="movie-div"><img class="movie-poster" src=${fullMovie.Poster}>
-           <div class="movie-words"></div></div>`
+           groupMovieArray.push(fullMovie)
         }
-        console.log(grouptitles)
-       dataDisplay.innerHTML=grouptitles
+        console.log(groupMovieArray)
+        let key = "Title"
+        let NoDupFilms = removeDuplicates(groupMovieArray,key)
+        console.log(NoDupFilms)
+    
     }
 
+}
+
+function removeDuplicates(arr,key){
+    return [...new Map(arr.map(item => [item[key], item])).values()]
 }
 
 
