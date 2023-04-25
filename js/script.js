@@ -2,6 +2,10 @@ const searchMovie = document.getElementById('search')
 let inputValue = document.getElementById('enter-movie')
 let dataDisplay = document.getElementById('data-display')
 let groupMovieArray =[]
+
+
+
+
 searchMovie.addEventListener('click',function(){
     let searchedValue = inputValue.value
     inputValue.value =""
@@ -27,6 +31,7 @@ async function fetchMoviesJSON(searchableMovie){
         let key = "Title"
         let NoDupFilms = removeDuplicates(groupMovieArray,key)
         console.log(NoDupFilms)
+        displayFilms(NoDupFilms)
         
     
     }
@@ -42,6 +47,20 @@ function removeDuplicates(arr,key){
     return [...new Map(arr.map(item => [item[key], item])).values()]
 }
 
+function displayFilms(data){
+let movieText =``
+for(let movie of data){
+movieText+=`<div class="movie-div">
+<img class="movie-poster" src="${movie.Poster}"></img>
+<div class="movie-context"><h2>${movie.Title}</h2></div>
+</div>
+
+`
+}
+
+    dataDisplay.innerHTML = movieText
+}
+
 
 class Film{
     constructor(data){
@@ -52,6 +71,8 @@ class Film{
         }
     }
 }
+
+
 
 
 ////Think about return all the movies in an array then checking them for pictures and placing in a image for the blank ones and also maybe catch duplicates. 
