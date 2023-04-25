@@ -22,19 +22,35 @@ async function fetchMoviesJSON(searchableMovie){
         for(let i = 0; i<movies.Search.length;i++){
            const res = await fetch(`https://www.omdbapi.com/?apikey=55ea45d4&t=${movies.Search[i].Title}`)
            const fullMovie = await res.json()
-           groupMovieArray.push(fullMovie)
+           groupMovieArray.push(new Film(fullMovie))
         }
-        console.log(groupMovieArray)
         let key = "Title"
         let NoDupFilms = removeDuplicates(groupMovieArray,key)
         console.log(NoDupFilms)
+        
     
     }
 
 }
 
+
+
+
+
+
 function removeDuplicates(arr,key){
     return [...new Map(arr.map(item => [item[key], item])).values()]
+}
+
+
+class Film{
+    constructor(data){
+        Object.assign(this, data)
+        this.watchlisted = false
+        this.watchlistCheck = function(){
+            console.log("LOL")
+        }
+    }
 }
 
 
