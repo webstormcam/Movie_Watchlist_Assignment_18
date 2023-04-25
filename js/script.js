@@ -50,8 +50,10 @@ function removeDuplicates(arr,key){
 function displayFilms(data){
 let movieText =``
 for(let movie of data){
+let movieImage = `${movie.Poster==="N/A"?'../images/No_Image_Found.png':movie.Poster}`
+
 movieText+=`<div class="movie-div">
-<img class="movie-poster" src="${movie.Poster}"></img>
+<img class="movie-poster" src="${movieImage}"></img>
 <div class="movie-context"><h2>${movie.Title}</h2></div>
 </div>
 
