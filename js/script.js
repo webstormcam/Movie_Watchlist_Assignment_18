@@ -65,7 +65,7 @@ ${movie.Plot}</div>
 `
 }
     dataDisplay.innerHTML = movieText
-    /// Make a loop here and assign each button its function????
+    /// Make a loop here and assign each button its function????????
    
 }
 
