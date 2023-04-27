@@ -32,6 +32,7 @@ async function fetchMoviesJSON(searchableMovie){
         let key = "Title"
          NoDupFilms = removeDuplicates(groupMovieArray,key)
         console.log(NoDupFilms)
+        //Might have to check local storage here
         displayFilms(NoDupFilms)
         
     
@@ -76,7 +77,10 @@ ${movie.Plot}</div>
         button.classList.add('own')
         button.addEventListener("click", function() {
         /// This takes each film and assigns the method to each button
-          NoDupFilms[i].movieThing()
+          let isItWatched=NoDupFilms[i].movieThing()
+          button.style.color="red"
+          console.log(isItWatched)
+          //Toggle Button Stuff HERE
         });
         movieDivs[i].appendChild(button);
     }
@@ -92,6 +96,9 @@ class Film{
     movieThing(){
         console.log(this.Title)
         console.log(this)
+        return this.watchlisted
+
+        ///Push and remove local storage here
       
     }
 }
