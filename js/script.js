@@ -91,6 +91,7 @@ class Film{
     }
     movieThing(){
         console.log(this.Title)
+        console.log(this)
     }
 }
 
