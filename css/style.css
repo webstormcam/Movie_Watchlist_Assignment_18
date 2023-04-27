@@ -197,4 +197,8 @@ h2{
     right: 0;
     height: 20px;
     display: inline;
+    background: none;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
 }
