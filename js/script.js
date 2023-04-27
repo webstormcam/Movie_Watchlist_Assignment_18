@@ -53,12 +53,12 @@ function displayFilms(data){
 let movieText =``
 /// Creates the movies on the page. 
 for(let movie of data){
-let movieImage = `${movie.Poster==="N/A"?'../images/No_Image_Found.png':movie.Poster}`
+let movieImage = `${movie.Poster==="N/A"?'./images/No_Image_Found.png':movie.Poster}`
 
 movieText+=`<div class="movie-div">
 <img class="movie-poster" src="${movieImage}"></img>
 <div class="movie-context">
-<div class="title-area"><h2>${movie.Title}</h2><img class="star" src="../images/Star_Icon.png"><p>${movie.imdbRating}</p></div>
+<div class="title-area"><h2>${movie.Title}</h2><img class="star" src="./images/Star_Icon.png"><p>${movie.imdbRating}</p></div>
 <div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p></div>
 <div class="movie-desc-section">
 ${movie.Plot}</div>
