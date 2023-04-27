@@ -2,6 +2,7 @@ const searchMovie = document.getElementById('search')
 let inputValue = document.getElementById('enter-movie')
 let dataDisplay = document.getElementById('data-display')
 let groupMovieArray =[]
+let NoDupFilms =[]
 
 
 
@@ -29,7 +30,7 @@ async function fetchMoviesJSON(searchableMovie){
            groupMovieArray.push(new Film(fullMovie))
         }
         let key = "Title"
-        let NoDupFilms = removeDuplicates(groupMovieArray,key)
+         NoDupFilms = removeDuplicates(groupMovieArray,key)
         console.log(NoDupFilms)
         displayFilms(NoDupFilms)
         
@@ -57,7 +58,7 @@ movieText+=`<div class="movie-div">
 <img class="movie-poster" src="${movieImage}"></img>
 <div class="movie-context">
 <div class="title-area"><h2>${movie.Title}</h2><img class="star" src="../images/Star_Icon.png"><p>${movie.imdbRating}</p></div>
-<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p><button id="${movie.Title}">Watchlist</button></div>
+<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p></div>
 <div class="movie-desc-section">
 ${movie.Plot}</div>
 </div>
@@ -65,8 +66,20 @@ ${movie.Plot}</div>
 `
 }
     dataDisplay.innerHTML = movieText
-    /// Make a loop here and assign each button its function????????
-   
+    
+    //// For each movie div and append the button, we can worry about styling it after the fact. 
+
+    let movieDivs = document.getElementsByClassName('facts-button-area')
+    for(let i=0;i<movieDivs.length;i++){
+        let button = document.createElement("button")
+        button.textContent = "Watchlist"
+        button.classList.add('own')
+        button.addEventListener("click", function() {
+        /// This takes each film and assigns the method to each button
+          NoDupFilms[i].movieThing()
+        });
+        movieDivs[i].appendChild(button);
+    }
 }
 
 
@@ -76,7 +89,11 @@ class Film{
         this.watchlisted = false
        
     }
+    movieThing(){
+        console.log(this.Title)
+    }
 }
+
 
 
 

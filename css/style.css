@@ -152,6 +152,8 @@ a{
     padding: 1em 0em;
     display: flex;
     color:  #ffffff;;
+    position: relative;
+    
 }
 
 h2{
@@ -188,4 +190,11 @@ h2{
     color: #a5a5a5;
     font-size: 0.88em;
     line-height: 1.5;
+}
+
+.own{
+    position: relative;
+    right: 0;
+    height: 20px;
+    display: inline;
 }
