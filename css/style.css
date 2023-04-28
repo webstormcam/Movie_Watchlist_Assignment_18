@@ -198,3 +198,12 @@ h2{
     border: none;
     cursor: pointer;
 }
+
+.toggle-pic{
+    margin-right: 0.5em;
+}
+
+.watch-section{
+    display: flex;
+    align-items: center;
+}

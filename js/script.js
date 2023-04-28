@@ -59,7 +59,7 @@ movieText+=`<div class="movie-div">
 <img class="movie-poster" src="${movieImage}"></img>
 <div class="movie-context">
 <div class="title-area"><h2>${movie.Title}</h2><img class="star" src="./images/Star_Icon.png"><p>${movie.imdbRating}</p></div>
-<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p><button class="watchlist-button">Watchlist</button></div>
+<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p><div class="watch-section"><img class="toggle-pic" src="./images/PLUS_ICON.png"></img><button class="watchlist-button">Watchlist</button></div></div>
 <div class="movie-desc-section">
 ${movie.Plot}</div>
 </div>
@@ -71,6 +71,7 @@ ${movie.Plot}</div>
     //// For each movie div and append the button, we can worry about styling it after the fact. 
 
     let buttons = document.getElementsByClassName('watchlist-button')
+    let togglePics = document.getElementsByClassName('toggle-pic')
     for(let i=0;i<buttons.length;i++){
         buttons[i].addEventListener("click", function() {
         /// This takes each film and assigns the method to each button
@@ -79,8 +80,12 @@ ${movie.Plot}</div>
           //Toggle Button Stuff HERE
           if(buttons[i].innerHTML==="Watchlist"){
             buttons[i].innerHTML="Remove"
+            togglePics[i].src ="./images/Minus-Icon.png"
+            
+
          } else{
             buttons[i].innerHTML="Watchlist"
+            togglePics[i].src ="./images/PLUS_ICON.png"
          }
         });
 
