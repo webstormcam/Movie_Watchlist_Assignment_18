@@ -59,7 +59,7 @@ movieText+=`<div class="movie-div">
 <img class="movie-poster" src="${movieImage}"></img>
 <div class="movie-context">
 <div class="title-area"><h2>${movie.Title}</h2><img class="star" src="./images/Star_Icon.png"><p>${movie.imdbRating}</p></div>
-<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p></div>
+<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p><button class="watchlist-button">Watchlist</button></div>
 <div class="movie-desc-section">
 ${movie.Plot}</div>
 </div>
@@ -70,19 +70,20 @@ ${movie.Plot}</div>
     
     //// For each movie div and append the button, we can worry about styling it after the fact. 
 
-    let movieDivs = document.getElementsByClassName('facts-button-area')
-    for(let i=0;i<movieDivs.length;i++){
-        let button = document.createElement("button")
-        button.textContent = "Watchlist"
-        button.classList.add('own')
-        button.addEventListener("click", function() {
+    let buttons = document.getElementsByClassName('watchlist-button')
+    for(let i=0;i<buttons.length;i++){
+        buttons[i].addEventListener("click", function() {
         /// This takes each film and assigns the method to each button
-          let isItWatched=NoDupFilms[i].movieThing()
-          button.style.color="red"
-          console.log(isItWatched)
+            NoDupFilms[i].movieThing()
+            
           //Toggle Button Stuff HERE
+          if(buttons[i].innerHTML==="Watchlist"){
+            buttons[i].innerHTML="Remove"
+         } else{
+            buttons[i].innerHTML="Watchlist"
+         }
         });
-        movieDivs[i].appendChild(button);
+
     }
 }
 
@@ -96,7 +97,7 @@ class Film{
     movieThing(){
         console.log(this.Title)
         console.log(this)
-        return this.watchlisted
+        return this.watchlisted=true
 
         ///Push and remove local storage here
       

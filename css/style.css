@@ -192,11 +192,7 @@ h2{
     line-height: 1.5;
 }
 
-.own{
-    position: relative;
-    right: 0;
-    height: 20px;
-    display: inline;
+.watchlist-button{
     background: none;
     color: #ffffff;
     border: none;
