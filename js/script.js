@@ -3,7 +3,12 @@ let inputValue = document.getElementById('enter-movie')
 let dataDisplay = document.getElementById('data-display')
 let groupMovieArray =[]
 let NoDupFilms =[]
-let storageFilms = []
+let enteredFilms = []
+let storageFilms = JSON.parse(localStorage.getItem("movies"))
+
+if(storageFilms){
+enteredFilms = storageFilms
+}
 
 
 
@@ -105,8 +110,8 @@ class Film{
         console.log(this)
         if( this.watchlisted===false){
             this.watchlisted = true
-            storageFilms.push(this)
-            window.localStorage.setItem("movies",JSON.stringify(storageFilms))
+            enteredFilms.push(this)
+            window.localStorage.setItem("movies",JSON.stringify(enteredFilms))
         }
 
         ///Push and remove local storage here
