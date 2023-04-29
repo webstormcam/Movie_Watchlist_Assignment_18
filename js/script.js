@@ -75,7 +75,7 @@ movieText+=`<div class="movie-div">
 <img class="movie-poster" src="${movieImage}"></img>
 <div class="movie-context">
 <div class="title-area"><h2>${movie.Title}</h2><img class="star" src="./images/Star_Icon.png"><p>${movie.imdbRating}</p></div>
-<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p><div class="watch-section"><img class="toggle-pic" src="./images/PLUS_ICON.png"></img><button class="watchlist-button">Watchlist</button></div></div>
+<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p><div class="watch-section"><img class="toggle-pic" src="${movie.toggleButton}"></img><button class="watchlist-button">${movie.watchText}</button></div></div>
 <div class="movie-desc-section">
 ${movie.Plot}</div>
 </div>
@@ -83,14 +83,6 @@ ${movie.Plot}</div>
 `
 }
     dataDisplay.innerHTML = movieText
-/// Add in the toggle Buttonx
-    let buttons = document.getElementsByClassName('watchlist-button')
-    for(let i =0; i<buttons.length;i++){
-        buttons[i].addEventListener('click',function(){
-            noDupFilms[i].movieThing()
-        })
-    }
-
 }
 
 
@@ -98,21 +90,27 @@ class Film{
     constructor(data){
         Object.assign(this, data)
         this.watchlisted = false
-        /// Put text and and icon here and make the function change it 
-        /// Only loop over it to add the button but don't put ifs and shit within it contain to movie things
+        this.toggleButton = './images/PLUS_ICON.png'
+        this.watchText = "Watchlist"
        
     }
     movieThing(){
-        // if(this.watchlisted===false){
-        //     this.watchlisted = true
-        //     enteredFilms.push(this)
-        //     window.localStorage.setItem("movies",JSON.stringify(enteredFilms))
+        if(this.watchlisted===false){
+            this.watchlisted = true
+            this.toggleButton = './images/Minus-Icon.png'
+            this.watchText = "Remove"
+            enteredFilms.push(this)
+            window.localStorage.setItem("movies",JSON.stringify(enteredFilms))
          
-        // } else if(this.watchlisted===true){
-        //   this.watchlisted = false
-        //   movieRemoval(this)
-        // }
-        console.log(`I am a ${this.Title}`)
+        } else if(this.watchlisted===true){
+          this.watchlisted = false
+          this.toggleButton = './images/PLUS_ICON.png'
+          this.watchText = "Watchlist"
+          movieRemoval(this)
+        }
+
+      
+    
 
       
     }
@@ -132,5 +130,5 @@ function movieRemoval(movie){
 }
 
 
-/// On click change look
+
 
