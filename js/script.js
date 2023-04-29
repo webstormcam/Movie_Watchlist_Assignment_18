@@ -2,9 +2,12 @@ const searchMovie = document.getElementById('search')
 let inputValue = document.getElementById('enter-movie')
 let dataDisplay = document.getElementById('data-display')
 let groupMovieArray =[]
-let NoDupFilms =[]
+let noDupFilms =[]
 let enteredFilms = []
 let storageFilms = JSON.parse(localStorage.getItem("movies"))
+
+localStorage.clear();
+
 
 if(storageFilms){
 enteredFilms = storageFilms
@@ -36,10 +39,10 @@ async function fetchMoviesJSON(searchableMovie){
            groupMovieArray.push(new Film(fullMovie))
         }
         let key = "Title"
-         NoDupFilms = removeDuplicates(groupMovieArray,key)
-        console.log(NoDupFilms)
+         noDupFilms = removeDuplicates(groupMovieArray,key)
+        console.log(noDupFilms)
         //Might have to check local storage here
-        displayFilms(NoDupFilms)
+        displayFilms(noDupFilms)
         
     
     }
@@ -81,7 +84,7 @@ ${movie.Plot}</div>
     for(let i=0;i<buttons.length;i++){
         buttons[i].addEventListener("click", function() {
         /// This takes each film and assigns the method to each button
-            NoDupFilms[i].movieThing()
+            noDupFilms[i].movieThing()
             
           //Toggle Button Stuff HERE
           if(buttons[i].innerHTML==="Watchlist"){
@@ -106,12 +109,13 @@ class Film{
        
     }
     movieThing(){
-        console.log(this.Title)
-        console.log(this)
         if( this.watchlisted===false){
             this.watchlisted = true
             enteredFilms.push(this)
             window.localStorage.setItem("movies",JSON.stringify(enteredFilms))
+        } else if(this.watchlisted===true){
+          this.watchlisted = false
+          movieRemoval(this)
         }
 
         ///Push and remove local storage here
@@ -120,9 +124,13 @@ class Film{
 }
 /// If the IMDB ID matches splice that one out and put in the one that is in local storage. Then it can be toggled.
 
+function movieRemoval(movie){
+    let element = movie
+    for(let i = 0;i<enteredFilms.length;i++){
+        if(element.Title===enteredFilms[i].Title){
+            enteredFilms.splice(enteredFilms.indexOf[i],1)
+        }
+    }
+    localStorage.setItem("movies",JSON.stringify(enteredFilms))
 
-
-
-
-////Think about return all the movies in an array then checking them for pictures and placing in a image for the blank ones and also maybe catch duplicates. 
-//// Put all the movies in an array and then work with the class constructor to deal with our local storage thing
+}
