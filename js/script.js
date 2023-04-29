@@ -6,7 +6,7 @@ let noDupFilms =[]
 let enteredFilms = []
 let storageFilms = JSON.parse(localStorage.getItem("movies"))
 
-localStorage.clear();
+
 
 
 if(storageFilms){
@@ -42,6 +42,9 @@ async function fetchMoviesJSON(searchableMovie){
          noDupFilms = removeDuplicates(groupMovieArray,key)
         console.log(noDupFilms)
         //Might have to check local storage here
+     if(storageFilms){
+        
+     }
         displayFilms(noDupFilms)
         
     
@@ -76,9 +79,7 @@ ${movie.Plot}</div>
 `
 }
     dataDisplay.innerHTML = movieText
-    
-    //// For each movie div and append the button, we can worry about styling it after the fact. 
-
+/// Add in the toggle Button
     let buttons = document.getElementsByClassName('watchlist-button')
     let togglePics = document.getElementsByClassName('toggle-pic')
     for(let i=0;i<buttons.length;i++){
@@ -87,7 +88,7 @@ ${movie.Plot}</div>
             noDupFilms[i].movieThing()
             
           //Toggle Button Stuff HERE
-          if(buttons[i].innerHTML==="Watchlist"){
+          if(noDupFilms[i].watchlisted===true){
             buttons[i].innerHTML="Remove"
             togglePics[i].src ="./images/Minus-Icon.png"
             
@@ -109,14 +110,14 @@ class Film{
        
     }
     movieThing(){
-        if( this.watchlisted===false){
+        if(this.watchlisted===false){
             this.watchlisted = true
             enteredFilms.push(this)
             window.localStorage.setItem("movies",JSON.stringify(enteredFilms))
+         
         } else if(this.watchlisted===true){
           this.watchlisted = false
           movieRemoval(this)
-          localStorage.setItem("movies",JSON.stringify(enteredFilms))
         }
 
       
@@ -129,7 +130,8 @@ function movieRemoval(movie){
     for(let i = 0;i<enteredFilms.length;i++){
         if(element.imdbID===enteredFilms[i].imdbID){
             console.log(`${enteredFilms[i].Title} was removed`)
-            enteredFilms.splice(enteredFilms.indexOf[i],1)
+            enteredFilms.splice(i,1)
+            localStorage.setItem("movies",JSON.stringify(enteredFilms))
            
         }
     }
