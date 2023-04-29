@@ -116,9 +116,9 @@ class Film{
         } else if(this.watchlisted===true){
           this.watchlisted = false
           movieRemoval(this)
+          localStorage.setItem("movies",JSON.stringify(enteredFilms))
         }
 
-        ///Push and remove local storage here
       
     }
 }
@@ -127,10 +127,10 @@ class Film{
 function movieRemoval(movie){
     let element = movie
     for(let i = 0;i<enteredFilms.length;i++){
-        if(element.Title===enteredFilms[i].Title){
+        if(element.imdbID===enteredFilms[i].imdbID){
+            console.log(`${enteredFilms[i].Title} was removed`)
             enteredFilms.splice(enteredFilms.indexOf[i],1)
+           
         }
     }
-    localStorage.setItem("movies",JSON.stringify(enteredFilms))
-
 }
