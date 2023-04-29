@@ -40,10 +40,14 @@ async function fetchMoviesJSON(searchableMovie){
         }
         let key = "Title"
          noDupFilms = removeDuplicates(groupMovieArray,key)
-        console.log(noDupFilms)
-        //Might have to check local storage here
+        storageFilms = JSON.parse(localStorage.getItem("movies"))
+
      if(storageFilms){
-        
+       for(let i =0;i<storageFilms.length;i++){
+        if(storageFilms[i].imdbID===noDupFilms[i].imdbID){
+            noDupFilms[i] = storageFilms[i]
+        }
+       }
      }
         displayFilms(noDupFilms)
         
@@ -79,27 +83,14 @@ ${movie.Plot}</div>
 `
 }
     dataDisplay.innerHTML = movieText
-/// Add in the toggle Button
+/// Add in the toggle Buttonx
     let buttons = document.getElementsByClassName('watchlist-button')
-    let togglePics = document.getElementsByClassName('toggle-pic')
-    for(let i=0;i<buttons.length;i++){
-        buttons[i].addEventListener("click", function() {
-        /// This takes each film and assigns the method to each button
+    for(let i =0; i<buttons.length;i++){
+        buttons[i].addEventListener('click',function(){
             noDupFilms[i].movieThing()
-            
-          //Toggle Button Stuff HERE
-          if(noDupFilms[i].watchlisted===true){
-            buttons[i].innerHTML="Remove"
-            togglePics[i].src ="./images/Minus-Icon.png"
-            
-
-         } else{
-            buttons[i].innerHTML="Watchlist"
-            togglePics[i].src ="./images/PLUS_ICON.png"
-         }
-        });
-
+        })
     }
+
 }
 
 
@@ -107,18 +98,21 @@ class Film{
     constructor(data){
         Object.assign(this, data)
         this.watchlisted = false
+        /// Put text and and icon here and make the function change it 
+        /// Only loop over it to add the button but don't put ifs and shit within it contain to movie things
        
     }
     movieThing(){
-        if(this.watchlisted===false){
-            this.watchlisted = true
-            enteredFilms.push(this)
-            window.localStorage.setItem("movies",JSON.stringify(enteredFilms))
+        // if(this.watchlisted===false){
+        //     this.watchlisted = true
+        //     enteredFilms.push(this)
+        //     window.localStorage.setItem("movies",JSON.stringify(enteredFilms))
          
-        } else if(this.watchlisted===true){
-          this.watchlisted = false
-          movieRemoval(this)
-        }
+        // } else if(this.watchlisted===true){
+        //   this.watchlisted = false
+        //   movieRemoval(this)
+        // }
+        console.log(`I am a ${this.Title}`)
 
       
     }
@@ -136,3 +130,7 @@ function movieRemoval(movie){
         }
     }
 }
+
+
+/// On click change look
+
