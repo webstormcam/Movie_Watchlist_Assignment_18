@@ -98,7 +98,7 @@ class Film{
         this.watchlistChange = function(){
             if(this.watchlisted===false){
                 this.watchlisted= true
-                this.toggleButton = './images/Minus-icon.png'
+                this.toggleButton = './images/Minus-Icon.png'
                 this.watchText = "Remove"
                 storageFilms.push(this)
                 console.log(storageFilms)
@@ -120,12 +120,12 @@ class ExistingFilm{
     constructor(data){
         Object.assign(this, data)
         this.watchlisted = true
-        this.toggleButton ="./images/Minus-icon.png"
+        this.toggleButton ="./images/Minus-Icon.png"
         this.watchText ="Remove"
         this.watchlistChange = function(){
             if(this.watchlisted===false){
                 this.watchlisted= true
-                this.toggleButton = './images/Minus-icon.png'
+                this.toggleButton = './images/Minus-Icon.png'
                 this.watchText = "Remove"
                 storageFilms.push(this)
                 console.log(storageFilms)
