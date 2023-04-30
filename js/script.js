@@ -4,6 +4,11 @@ let dataDisplay = document.getElementById('data-display')
 let groupMovieArray =[]
 let noDupFilms =[]
 let storageFilms =[]
+let storedMovies = JSON.parse(localStorage.getItem("movies"))
+
+if(storedMovies){
+    storageFilms = storedMovies
+}
 
 searchMovie.addEventListener('click',function(){
     let searchedValue = inputValue.value
@@ -29,6 +34,11 @@ async function fetchMoviesJSON(searchableMovie){
         }
         let key = "Title"
          noDupFilms = removeDuplicates(groupMovieArray,key)
+
+         if(storageFilms){
+          
+         }
+         /////Check for the films out of order DUHHH LOL
 
         displayFilms(noDupFilms)
         
@@ -85,8 +95,8 @@ class Film{
                 this.toggleButton = './images/Minus-icon.png'
                 this.watchText = "Remove"
                 storageFilms.push(this)
-                displayFilms(noDupFilms)
                 console.log(storageFilms)
+                displayFilms(noDupFilms)
            } else{
                  this.watchlisted = false
                  this.toggleButton = './images/PLUS_ICON.png'
@@ -95,7 +105,7 @@ class Film{
                 removeMovie(this)
                 console.log(storageFilms)
         }
-     
+        localStorage.setItem("movies",JSON.stringify(storageFilms))
         }
     }
 }
