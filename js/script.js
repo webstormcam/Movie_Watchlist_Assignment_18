@@ -1,3 +1,7 @@
+
+
+
+
 const searchMovie = document.getElementById('search')
 let inputValue = document.getElementById('enter-movie')
 let dataDisplay = document.getElementById('data-display')
