@@ -36,7 +36,13 @@ async function fetchMoviesJSON(searchableMovie){
          noDupFilms = removeDuplicates(groupMovieArray,key)
 
          if(storageFilms){
-          
+          for(let i=0;i<storageFilms.length;i++){
+            for(let k=0;k<noDupFilms.length;k++){
+                if(storageFilms[i].imdbID===noDupFilms[k].imdbID){
+                    noDupFilms[k] = storageFilms[i]
+                }
+            }
+          }
          }
          /////Check for the films out of order DUHHH LOL
 
