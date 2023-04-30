@@ -3,18 +3,12 @@ let inputValue = document.getElementById('enter-movie')
 let dataDisplay = document.getElementById('data-display')
 let groupMovieArray =[]
 let noDupFilms =[]
-let enteredFilms = []
-let storageFilms = JSON.parse(localStorage.getItem("movies"))
+let storageFilms =[]
+let storedMovies = JSON.parse(localStorage.getItem("movies"))
 
-
-
-
-if(storageFilms){
-enteredFilms = storageFilms
+if(storedMovies){
+    storageFilms = storedMovies
 }
-
-
-
 
 searchMovie.addEventListener('click',function(){
     let searchedValue = inputValue.value
@@ -40,15 +34,18 @@ async function fetchMoviesJSON(searchableMovie){
         }
         let key = "Title"
          noDupFilms = removeDuplicates(groupMovieArray,key)
-        storageFilms = JSON.parse(localStorage.getItem("movies"))
 
-     if(storageFilms){
-       for(let i =0;i<storageFilms.length;i++){
-        if(storageFilms[i].imdbID===noDupFilms[i].imdbID){
-            noDupFilms[i] = storageFilms[i]
-        }
-       }
-     }
+         if(storageFilms){
+          for(let i=0;i<storageFilms.length;i++){
+            for(let k=0;k<noDupFilms.length;k++){
+                if(storageFilms[i].imdbID===noDupFilms[k].imdbID){
+                    noDupFilms[k] = new ExistingFilm (storageFilms[i])
+                }
+            }
+          }
+         }
+         /////Check for the films out of order DUHHH LOL
+
         displayFilms(noDupFilms)
         
     
@@ -75,7 +72,7 @@ movieText+=`<div class="movie-div">
 <img class="movie-poster" src="${movieImage}"></img>
 <div class="movie-context">
 <div class="title-area"><h2>${movie.Title}</h2><img class="star" src="./images/Star_Icon.png"><p>${movie.imdbRating}</p></div>
-<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p><div class="watch-section"><img class="toggle-pic" src="./images/PLUS_ICON.png"></img><button class="watchlist-button">Watchlist</button></div></div>
+<div class="facts-button-area"><p>${movie.Runtime}</p><p>${movie.Genre}</p><div class="watch-section"><img class="toggle-pic" src="${movie.toggleButton}"></img><button class="watchlist-button">${movie.watchText}</button></div></div>
 <div class="movie-desc-section">
 ${movie.Plot}</div>
 </div>
@@ -83,14 +80,12 @@ ${movie.Plot}</div>
 `
 }
     dataDisplay.innerHTML = movieText
-/// Add in the toggle Buttonx
-    let buttons = document.getElementsByClassName('watchlist-button')
-    for(let i =0; i<buttons.length;i++){
-        buttons[i].addEventListener('click',function(){
-            noDupFilms[i].movieThing()
-        })
+   let buttons = document.getElementsByClassName('watchlist-button')
+    for(let i =0;i<buttons.length; i++ ){
+        buttons[i].onclick = () =>{
+            data[i].watchlistChange()
+        }
     }
-
 }
 
 
@@ -98,39 +93,66 @@ class Film{
     constructor(data){
         Object.assign(this, data)
         this.watchlisted = false
-        /// Put text and and icon here and make the function change it 
-        /// Only loop over it to add the button but don't put ifs and shit within it contain to movie things
-       
-    }
-    movieThing(){
-        // if(this.watchlisted===false){
-        //     this.watchlisted = true
-        //     enteredFilms.push(this)
-        //     window.localStorage.setItem("movies",JSON.stringify(enteredFilms))
-         
-        // } else if(this.watchlisted===true){
-        //   this.watchlisted = false
-        //   movieRemoval(this)
-        // }
-        console.log(`I am a ${this.Title}`)
-
-      
-    }
-}
-/// If the IMDB ID matches splice that one out and put in the one that is in local storage. Then it can be toggled.
-
-function movieRemoval(movie){
-    let element = movie
-    for(let i = 0;i<enteredFilms.length;i++){
-        if(element.imdbID===enteredFilms[i].imdbID){
-            console.log(`${enteredFilms[i].Title} was removed`)
-            enteredFilms.splice(i,1)
-            localStorage.setItem("movies",JSON.stringify(enteredFilms))
-           
+        this.toggleButton = './images/PLUS_ICON.png'
+        this.watchText = "Watchlist"
+        this.watchlistChange = function(){
+            if(this.watchlisted===false){
+                this.watchlisted= true
+                this.toggleButton = './images/Minus-icon.png'
+                this.watchText = "Remove"
+                storageFilms.push(this)
+                console.log(storageFilms)
+                displayFilms(noDupFilms)
+           } else{
+                 this.watchlisted = false
+                 this.toggleButton = './images/PLUS_ICON.png'
+                 this.watchText = "Watchlist"
+                 displayFilms(noDupFilms)
+                removeMovie(this)
+                console.log(storageFilms)
+        }
+        localStorage.setItem("movies",JSON.stringify(storageFilms))
         }
     }
 }
 
+class ExistingFilm{
+    constructor(data){
+        Object.assign(this, data)
+        this.watchlisted = true
+        this.toggleButton ="./images/Minus-icon.png"
+        this.watchText ="Remove"
+        this.watchlistChange = function(){
+            if(this.watchlisted===false){
+                this.watchlisted= true
+                this.toggleButton = './images/Minus-icon.png'
+                this.watchText = "Remove"
+                storageFilms.push(this)
+                console.log(storageFilms)
+                displayFilms(noDupFilms)
+           } else{
+                 this.watchlisted = false
+                 this.toggleButton = './images/PLUS_ICON.png'
+                 this.watchText = "Watchlist"
+                 displayFilms(noDupFilms)
+                removeMovie(this)
+                console.log(storageFilms)
+        }
+        localStorage.setItem("movies",JSON.stringify(storageFilms))
+        }
+    }
+}
+/// If the IMDB ID matches splice that one out and put in the one that is in local storage. Then it can be toggled.
 
-/// On click change look
+
+function removeMovie(movie){
+    for(let i=0;i<storageFilms.length;i++){
+        if(movie.imdbID === storageFilms[i].imdbID){
+            storageFilms.splice(i,1)
+        }
+    }
+   
+}
+
+
 
