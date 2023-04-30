@@ -3,18 +3,7 @@ let inputValue = document.getElementById('enter-movie')
 let dataDisplay = document.getElementById('data-display')
 let groupMovieArray =[]
 let noDupFilms =[]
-let enteredFilms = []
-let storageFilms = JSON.parse(localStorage.getItem("movies"))
-
-
-
-
-if(storageFilms){
-enteredFilms = storageFilms
-}
-
-
-
+let storageFilms =[]
 
 searchMovie.addEventListener('click',function(){
     let searchedValue = inputValue.value
@@ -40,15 +29,7 @@ async function fetchMoviesJSON(searchableMovie){
         }
         let key = "Title"
          noDupFilms = removeDuplicates(groupMovieArray,key)
-        storageFilms = JSON.parse(localStorage.getItem("movies"))
 
-     if(storageFilms){
-       for(let i =0;i<storageFilms.length;i++){
-        if(storageFilms[i].imdbID===noDupFilms[i].imdbID){
-            noDupFilms[i] = storageFilms[i]
-        }
-       }
-     }
         displayFilms(noDupFilms)
         
     
@@ -83,6 +64,12 @@ ${movie.Plot}</div>
 `
 }
     dataDisplay.innerHTML = movieText
+   let  buttons = document.getElementsByClassName('watchlist-button')
+    for(let i =0;i<buttons.length; i++ ){
+        buttons[i].onclick = () =>{
+            data[i].watchlistChange()
+        }
+    }
 }
 
 
@@ -92,43 +79,33 @@ class Film{
         this.watchlisted = false
         this.toggleButton = './images/PLUS_ICON.png'
         this.watchText = "Watchlist"
-       
-    }
-    movieThing(){
-        if(this.watchlisted===false){
-            this.watchlisted = true
-            this.toggleButton = './images/Minus-Icon.png'
-            this.watchText = "Remove"
-            enteredFilms.push(this)
-            window.localStorage.setItem("movies",JSON.stringify(enteredFilms))
-         
-        } else if(this.watchlisted===true){
-          this.watchlisted = false
-          this.toggleButton = './images/PLUS_ICON.png'
-          this.watchText = "Watchlist"
-          movieRemoval(this)
+        this.watchlistChange = function(){
+            if(this.watchlisted===false){
+                this.watchlisted= true
+                console.log('This is true')
+                storageFilms.push(this)
+                console.log(storageFilms)
+           } else{
+                 this.watchlisted = false
+                 console.log('this is false')
+                 removeMovie(this)
         }
-
-      
-    
-
-      
+     
+        }
     }
 }
 /// If the IMDB ID matches splice that one out and put in the one that is in local storage. Then it can be toggled.
 
-function movieRemoval(movie){
-    let element = movie
-    for(let i = 0;i<enteredFilms.length;i++){
-        if(element.imdbID===enteredFilms[i].imdbID){
-            console.log(`${enteredFilms[i].Title} was removed`)
-            enteredFilms.splice(i,1)
-            localStorage.setItem("movies",JSON.stringify(enteredFilms))
-           
-        }
-    }
-}
 
+function removeMovie(movie){
+    for(let i=0;i<storageFilms.length;i++){
+        if(movie.imdbID === storageFilms[i].imdbID){
+            storageFilms.splice(i,1)
+        }
+        console.log(storageFilms)
+    }
+   
+}
 
 
 
