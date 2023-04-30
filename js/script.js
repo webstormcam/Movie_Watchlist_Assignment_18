@@ -39,7 +39,7 @@ async function fetchMoviesJSON(searchableMovie){
           for(let i=0;i<storageFilms.length;i++){
             for(let k=0;k<noDupFilms.length;k++){
                 if(storageFilms[i].imdbID===noDupFilms[k].imdbID){
-                    noDupFilms[k] = storageFilms[i]
+                    noDupFilms[k] = new ExistingFilm (storageFilms[i])
                 }
             }
           }
@@ -80,7 +80,7 @@ ${movie.Plot}</div>
 `
 }
     dataDisplay.innerHTML = movieText
-   let  buttons = document.getElementsByClassName('watchlist-button')
+   let buttons = document.getElementsByClassName('watchlist-button')
     for(let i =0;i<buttons.length; i++ ){
         buttons[i].onclick = () =>{
             data[i].watchlistChange()
@@ -95,6 +95,33 @@ class Film{
         this.watchlisted = false
         this.toggleButton = './images/PLUS_ICON.png'
         this.watchText = "Watchlist"
+        this.watchlistChange = function(){
+            if(this.watchlisted===false){
+                this.watchlisted= true
+                this.toggleButton = './images/Minus-icon.png'
+                this.watchText = "Remove"
+                storageFilms.push(this)
+                console.log(storageFilms)
+                displayFilms(noDupFilms)
+           } else{
+                 this.watchlisted = false
+                 this.toggleButton = './images/PLUS_ICON.png'
+                 this.watchText = "Watchlist"
+                 displayFilms(noDupFilms)
+                removeMovie(this)
+                console.log(storageFilms)
+        }
+        localStorage.setItem("movies",JSON.stringify(storageFilms))
+        }
+    }
+}
+
+class ExistingFilm{
+    constructor(data){
+        Object.assign(this, data)
+        this.watchlisted = true
+        this.toggleButton ="./images/Minus-icon.png"
+        this.watchText ="Remove"
         this.watchlistChange = function(){
             if(this.watchlisted===false){
                 this.watchlisted= true
