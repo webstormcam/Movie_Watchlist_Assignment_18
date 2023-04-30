@@ -82,13 +82,18 @@ class Film{
         this.watchlistChange = function(){
             if(this.watchlisted===false){
                 this.watchlisted= true
-                console.log('This is true')
+                this.toggleButton = './images/Minus-icon.png'
+                this.watchText = "Remove"
                 storageFilms.push(this)
+                displayFilms(noDupFilms)
                 console.log(storageFilms)
            } else{
                  this.watchlisted = false
-                 console.log('this is false')
-                 removeMovie(this)
+                 this.toggleButton = './images/PLUS_ICON.png'
+                 this.watchText = "Watchlist"
+                 displayFilms(noDupFilms)
+                removeMovie(this)
+                console.log(storageFilms)
         }
      
         }
@@ -102,7 +107,6 @@ function removeMovie(movie){
         if(movie.imdbID === storageFilms[i].imdbID){
             storageFilms.splice(i,1)
         }
-        console.log(storageFilms)
     }
    
 }
