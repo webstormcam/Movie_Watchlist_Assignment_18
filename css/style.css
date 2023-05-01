@@ -207,3 +207,28 @@ h2{
     display: flex;
     align-items: center;
 }
+
+
+
+@media screen and (max-width:515px){
+    .movie-div{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-poster{
+        width: 200px;
+    }
+
+    .data-display{
+        padding: 2em;
+    }
+
+    .title-link-space{
+        flex-direction: column;
+    }
+
+    .page-link{
+        margin-top: 1em;
+    }
+}
